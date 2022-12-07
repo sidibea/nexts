@@ -1,0 +1,130 @@
+{% extends 'base.html.twig' %}
+{% block slider %}
+    <div class="kode-inner-banner">
+        <div class="kode-page-heading">
+            <h2>Create new storyline</h2>
+            <ol class="breadcrumb">
+                <li><a href="{{ path('app_home') }}">Home</a></li>
+                <li class="active">Create new storyline</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container clearfix">
+        <div class="postcontent nobottommargin clearfix">
+
+            <div class="row">
+                <div class="col-md-12 nobottommargin">
+
+                    <div class="feature-box fbox-plain">
+                        <div class="fbox-icon">
+                            <a href="#"><i class="i-alt">1.</i></a>
+                        </div>
+                        <h3>Step 1: Enter the information about your storyline.</h3>
+                    </div>
+
+                </div>
+            </div>
+            <div class="line "></div>
+            {{ form_start(form) }}
+
+            {# Les erreurs générales du formulaire. #}
+            {{ form_errors(form) }}
+            <div class="row">
+                {% if not form.vars.valid %}
+
+                    {# Loop through every form item #}
+                    {% for child in form.children %}
+                        {# Display the errors of the form item #}
+                        {%for error in child.vars.errors%}
+                            <div class="alert alert-warning">{{error.message}}</div>
+                        {%endfor%}
+                    {%endfor%}
+
+                {%endif%}
+            </div>
+            <div class="row notopmargin">
+                <div class="form-group">
+                    <label for="nom_carte">Forum - <span style="font-size: 12px; text-transform: lowercase">The genre of your storyline</span></label>
+                    {{ form_widget(form.forum, {'attr': {'class': 'form-control select-1 ', 'id': 'nom_carte', 'placeholder': '' }}) }}
+                </div>
+                <div class="form-group">
+                    <label for="nom_carte">Mode of writing - <span style="font-size: 12px; text-transform: lowercase">Audience or non audience participation</span></label>
+                    {{ form_widget(form.type, {'attr': {'class': 'form-control select-1 storyType', 'id': 'nom_carte', 'placeholder': '' }}) }}
+                </div>
+                <div class="form-group form-group1 contributors">
+                    <label for="nom_carte">Contributors</label>
+                    {{ form_widget(form.contributors, {'attr': {'class': 'form-control  select-1 ', 'id': 'nom_carte', 'placeholder': '' }}) }}
+                </div>
+                <div class="form-group">
+                    <label for="nom_carte">Title</label>
+                    {{ form_widget(form.title, {'attr': {'class': 'form-control ', 'id': 'nom_carte', 'placeholder': '' }}) }}
+                </div>
+                <div class="form-group">
+                    <label for="nom_carte">Description - <span style="font-size: 12px; text-transform: lowercase">Synopsis of your storyline</span></label>
+                    {{ form_widget(form.description, {'attr': {  'class': 'form-control ', 'id': 'nom_carte', 'rows': '10' }}) }}
+                </div>
+                <div class="form-group">
+                    <label for="nom_carte">Cover</label>
+                    {{ form_widget(form.imageFile, {'attr': { 'class': 'file ', 'id': 'nom_carte', 'rows': '10' }}) }}
+                </div>
+
+                <div class="form-group">
+                    <label for="nom_carte">Active</label>
+                    {{ form_widget(form.isEnabled, {'attr': { 'checked':'checked', 'data-on-text': 'YES', 'data-off-text': 'NO','class': 'form-control bt-switch', 'id': 'nom_carte', 'rows': '10' }}) }}
+                </div>
+
+
+                <div class=" line"></div>
+
+                <div class="form-group">
+                    <button type="submit" class="button button-3d button-large button-rounded button-green">Create</button>
+                </div>
+
+            </div>
+
+
+            {{ form_rest(form) }}
+
+            {# Fermeture de la balise <form> du formulaire HTML #}
+            {{ form_end(form) }}
+
+        </div>
+        {% include '_sidebar.html.twig' %}
+
+    </div>
+
+
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        jQuery(document).ready( function($){
+
+            $('.form-group1').hide();
+            $('#storyline_type').change(function(){
+                if($('#storyline_type').val() == 'Group writing') {
+                    $('.form-group1').show();
+
+                } else {
+                    $('.form-group1').hide();
+                }
+            });
+
+            // Multiple Select
+            $(".select-1").select2({
+                placeholder: "Select Contributors"
+            });
+            jQuery(".bt-switch").bootstrapSwitch();
+
+
+
+
+
+
+        });
+    </script>
+
+{% endblock %}

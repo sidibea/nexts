@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block slider %}
+    <div class="kode-inner-banner">
+        <div class="kode-page-heading">
+            <h2>Login to your account</h2>
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">Login</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    <div class="container clearfix">
+        <div class="postcontent nobottommargin clearfix">
+            {% if error %}
+                <div class="style-msg errormsg">
+                    <div class="sb-msg"><i class="icon-remove"></i><strong>Oh snap!</strong> {{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                </div>
+                <div>
+            {% endif %}
+
+
+            <div class="panel panel-primary divcenter noradius noborder" style=" background-color: rgba(255,255,255,0.93);">
+                <div class="panel-body" style="padding: 40px;">
+                    {{ form_errors(form) }}
+
+                    {{ form_start(form) }}
+                        <h3>Login to your Account</h3>
+
+                        <div class="col-md-12">
+                            <label for="login-form-username">Username</label>
+                            {{ form_widget(form._username, {'attr': { 'class':'form-control' }}) }}
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="login-form-password">Password</label>
+                            {{ form_widget(form._password, {'attr': { 'class':'form-control' }}) }}
+                        </div>
+                        <div class="col-md-6 nobottommargin">
+
+                           <br> {{ form_widget(form.save, {'attr': { 'class':'button button-3d button-black nomargin' }}) }}
+
+                        </div>
+                    {{ form_end(form) }}
+
+                    <div class="col-md-6">
+                        <br>
+                        <a href="{{ path('nucleos_user_resetting_request') }}" class="fright">Forgot Password?</a><br>
+
+                        <a href="{{ path('app_registration') }}" class="">Don't have account yet ? Register now</a>
+                    </div>
+
+                    <div class="line line-sm"></div>
+                    <div class="center">
+                        <h4 style="margin-bottom: 15px;">or Login with:</h4>
+                        <a href="{{ path('connect_facebook_start') }}" class="button button-rounded si-facebook si-colored">Facebook</a>
+                        <span class="d-none d-md-inline-block">or</span>
+                        <a href="#" class="button button-rounded si-twitter si-colored">Twitter</a>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div><!-- .postcontent end -->
+
+
+</div>
+    </div>
+
+{% endblock %}

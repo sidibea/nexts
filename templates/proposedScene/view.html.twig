@@ -1,0 +1,59 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ proposed.scene.title }} [Proposed] /{{ proposed.count }} {% endblock %}
+
+{% block slider %}
+    <div class="kode-inner-banner">
+        <div class="kode-page-heading">
+            <h2>{{  proposed.scene.storyline.title }} [proposed] / {{ proposed.count }}</h2>
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li ><a href="{{ path('app_forum_show', { 'id' : proposed.scene.storyline.forum.id }) }}">{{ proposed.scene.storyline.forum.name }}</a> </li>
+                <li ><a href="{{ path('ns_web_story_view', { 'id': proposed.scene.storyline.id }) }}">{{ proposed.scene.storyline.title }}</a> </li>
+                <li class="active">read scenes </li>
+            </ol>
+        </div>
+    </div>
+
+{% endblock %}
+{% block content %}
+    <div class="content-wrap">
+        <div class="container clearfix notopmargin " style="top: -2em; font-size: 1.2em; text-transform: uppercase; font-family: Courier" >
+            <span><a href="{{ path('app_home') }}">Home / </a></span>
+            <span><a href="{{ path('app_forum_show', { 'id' : proposed.scene.storyline.forum.id }) }}">{{ proposed.scene.storyline.forum.name }} / </a></span>
+            <span><a href="{{ path('ns_web_story_view', { 'id': proposed.scene.storyline.id }) }}">{{ proposed.scene.storyline.title }} / </a></span>
+            <span class="active">read scenes</span>
+
+        </div>
+        <div class="container">
+            <div class="postcontent nobootommargin clearfix">
+                <div class="clear"></div>
+                <div class=" panel panel-default">
+                    <div class="panel-heading"><b>{{ proposed.scene.title }} </b></div>
+                    <div class="panel-body" style="font-family: Courier; word-spacing: 4px">
+                        {{ proposed.scene.content  | raw }}
+                    </div>
+                </div>
+                <div class=" panel panel-default">
+                    <div class="panel-heading"><b>[Proposed] {{ proposed.title }} </b></div>
+                    <div class="panel-body" style="font-family: Courier; word-spacing: 4px">
+                        {{ proposed.content  | raw }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <a href="{{ path('ns_web_scenes_view', { 'id': proposed.scene.storyline.id }) }}" class="button button-3d button-large button-rounded button-green">Exit scene</a>
+                    {% if proposed.scene.storyline.publishedBy == app.user %}
+                        <a href="{{ path('ns_web_validate_scenes', { 'id': proposed.id }) }}" class="button fright button-3d button-large button-rounded button-green">Validate scene</a>
+
+                    {% endif %}
+
+                </div>
+            </div>
+            {% include '_sidebar.html.twig' %}
+
+        </div>
+
+    </div>
+
+{% endblock %}
+

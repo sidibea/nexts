@@ -1,0 +1,114 @@
+{% extends "Admin/layout.html.twig" %}
+
+
+
+{% block breadcrumbs %}
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1>Call to Action section</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="page-header float-right">
+            <div class="page-title">
+                <ol class="breadcrumb text-right">
+                    <li class="">Dashboard</li>
+                    <li class="active">Call to action</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="animated fadeIn">
+
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_start(form) }}
+
+                {# Les erreurs générales du formulaire. #}
+                {{ form_errors(form) }}
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">New item </strong>
+                    </div>
+                    <div class="card-body">
+                        {% if not form.vars.valid %}
+
+                            {# Loop through every form item #}
+                            {% for child in form.children %}
+                                {# Display the errors of the form item #}
+                                {%for error in child.vars.errors%}
+                                    <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                                        <span class="badge badge-pill badge-danger">Erreur</span>
+                                        {{error.message}}
+                                    </div>
+                                {%endfor%}
+                            {%endfor%}
+
+                        {%endif%}
+
+
+
+                        <div class="form-group">
+                            <label class=" form-control-label">icon</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-institution"></i></div>
+                                {{ form_widget(form.icon, {'attr': {'class': 'form-control', 'placeholder': ' ' }}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" form-control-label">Title</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-institution"></i></div>
+                                {{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder': ' ' }}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" form-control-label">ShortDescription</label>
+                            <div class="input-group">
+                                {{ form_widget(form.shortDescription, {'attr': {'class': 'form-control', 'placeholder': ' ' }}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" form-control-label">Description</label>
+                            <div class="input-group">
+                                {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': ' ' }}) }}
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-check-inline form-check">
+                            <label class="inline-checkbox1">Active
+                                {{ form_widget(form.enabled, {'attr': {'class': 'form-check-input', 'placeholder': '' }}) }}
+
+                            </label>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            <i class="fa fa-dot-circle-o"></i> Enregistrer
+                        </button>
+                        <button type="reset" class="btn btn-danger btn-sm">
+                            <i class="fa fa-dot-circle-o"></i> Annuller
+                        </button>
+                    </div>
+                </div>
+                {{ form_rest(form) }}
+
+                {# Fermeture de la balise <form> du formulaire HTML #}
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

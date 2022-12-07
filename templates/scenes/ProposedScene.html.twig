@@ -1,0 +1,97 @@
+{% set t = 0 %}
+
+
+{% if pagination is empty %}
+    <h4 style="color: red">NO PROPOSED SCENES</h4>
+{% else %}
+    <div class="row">
+    {% for proposed in pagination %}
+
+
+        {% if loop.index is divisible by(3) %}
+        <div class="col-md-4 feeds">
+            <div class="mpost clearfix" style="font-family: Courier; text-align: justify; word-spacing: 4px">
+
+                <div class="entry-c">
+                    <div class="entry-title" style="font-family: Courier; word-spacing: 4px">
+                        <h4 style="font-family: Courier; text-align: left; word-spacing: 4px"><a href=""> {{ proposed.title }}</a><a href=""> {{ proposed.title }}</a> {% if proposed.publishedBy == app.user %}   <a href="{{ path('ns_web_scenes_edit', { 'id': proposed.id }) }}" class=" "><i class="fa fa-pencil"></i> </a>{% endif %}</h4>
+                    </div>
+                    <ul class="entry-meta clearfix">
+                        <li><i class="icon-user"></i>Created by {{ proposed.publishedBy.firstname }} {{ proposed.publishedBy.lastname }} {{ proposed.createdAt | date('d M Y  h:i:s') }}</li>
+                    </ul>
+                    <div class="entry-content">
+                        {{ proposed.content  | striptags | raw | slice(0, 100)}}
+                        <br> <a href="{{ path('ns_web_proposed_scenes_view', { 'id': proposed.id }) }}" class="more-link">Read scene</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+            <div class="line"></div>
+            </div>
+         <div class="row">
+
+    {% else  %}
+<div class="col-md-4 feeds">
+    <div class="mpost clearfix" style="font-family: Courier; text-align: justify; word-spacing: 4px">
+
+        <div class="entry-c">
+            <div class="entry-title">
+                <h4 style="font-family: Courier; text-align: left; word-spacing: 4px"><a href=""> {{ proposed.title }} </a>  {% if proposed.publishedBy == app.user %}<a href="{{ path('ns_web_scenes_edit', { 'id': proposed.id }) }}" class=" "><i class="fa fa-pencil"></i> </a>{% endif %} </h4>
+            </div>
+            <ul class="entry-meta clearfix">
+                <li><i class="icon-user"></i>Created by {{ proposed.publishedBy.firstname }} {{ proposed.publishedBy.lastname }} {{ proposed.createdAt | date('d M Y  h:i:s') }}</li>
+            </ul>
+            <div class="entry-content">
+                {{ proposed.content  | striptags | raw | slice(0, 100) }}
+                <br> <a href="{{ path('ns_web_proposed_scenes_view', { 'id': proposed.id }) }}" class="more-link">Read scene</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    {% endif %}
+
+
+    {% endfor %}
+
+    </div>
+
+{% endif %}
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Modal Heading</h4>
+                <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+                <h4>Text in a modal</h4>
+                <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+
+                <h4>Popover in a modal</h4>
+                <p>This <a href="#" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="" data-bs-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title">button</a> should trigger a popover on click.</p>
+
+                <h4>Tooltips in a modal</h4>
+                <p><a href="#" data-bs-toggle="tooltip" title="" data-original-title="Tooltip">This link</a> and <a href="#" data-bs-toggle="tooltip" title="" data-original-title="Tooltip">that link</a> should have tooltips on hover.</p>
+                <hr>
+                <h4>Overflowing text to show scroll behavior</h4>
+                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                <p class="mb-0">Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

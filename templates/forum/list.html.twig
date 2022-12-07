@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Forums {% endblock %}
+
+{% block slider %}
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+    <div class="kode-inner-banner">
+        <div class="kode-page-heading">
+            <h2>Explore Forums</h2>
+            <ol class="breadcrumb">
+                <li><a href="{{ path('app_home') }}">Home</a></li>
+                <li class="active">forums</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="container clearfix">
+        <div style="width: 100%" class="postcontent nobottommargin clearfix">
+            <div id="posts" class="small-thumbs">
+                <div class="fancy-title title-double-border">
+                    <h1>Displaying <span>forums</span></h1>
+                </div>
+                {% if forums |length > 0 %}
+                    {% for forum in forums %}
+                        <div class="entry clearfix">
+                            <div class="entry-image">
+                                <a href="" data-lightbox="image">
+                                    <img class="image_fade" style="width: 100% !important; height: 200px;" src="{{ vich_uploader_asset(forum, 'photoFile') }}"/>
+                                </a>
+                            </div>
+                            <div class="entry-c">
+                                <div class="entry-title">
+                                    <h2><a href="{{ path('app_forum_show', { 'id' : forum.id }) }}">{{ forum.name }} ({{ forum.storylines |length }} storylines)</a></h2>
+                                </div>
+                                <div class="entry-content">
+                                    <p style="text-align: justify   ">{{ forum.description | striptags }}</p>
+                                    <a href="{{ path('app_forum_show', { 'id' : forum.id }) }}" class="button button-3d fright button-rounded button-green"><i class="icon-door"></i>Enter forum</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+
+                {% else %}
+                    <h4>OOOPPS.! THERE IS NO FORUM.</h4>
+
+
+
+                {% endif %}
+
+
+
+
+
+
+            </div><!-- #posts end -->
+
+
+
+        </div>
+    </div>
+
+
+{% endblock %}

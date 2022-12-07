@@ -1,0 +1,78 @@
+{% extends "Admin/layout.html.twig" %}
+
+{% block breadcrumbs %}
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1>Storylines</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="page-header float-right">
+            <div class="page-title">
+                <ol class="breadcrumb text-right">
+                    <li class="">Dashboard</li>
+                    <li class="active">Storylines</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="animated fadeIn">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th {% if pagination.isSorted('s.title') %} class="sorted"{% endif %} scope="col">{{ knp_pagination_sortable(pagination, 'Title', 's.title') }}</th>
+                                <th>Forum</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Proposer</th>
+                                <th scope="col">Published At</th>
+                                <th scope="col">Status</th>
+                                <th scope="col"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for story in pagination %}
+                                <tr>
+                                    <th scope="row"><img class="image_fade" style="width: 50px; height: 50px " src="{{ vich_uploader_asset(story, 'imageFile') }}"/></th>
+                                    <td>{{ story.title }}</td>
+                                    <td>{{ story.forum.name }}</td>
+                                    <td>{{ story.description |striptags|slice(0, 100) }}</td>
+                                    <td>{{ story.publishedBy.username }}</td>
+                                    <td>{{ story.createdAt | date('d-m-Y') }}</td>
+                                    <td>
+                                        {% if story.isEnabled == true %}
+                                            <span class="badge badge-success">Active</span>
+                                        {% else %}
+                                            <span class="badge badge-danger">Desactive</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('ns_web_story_view', { 'id': story.id }) }}" target="_blank"  class="btn btn-success"><i class="fa fa-eye"></i></a>
+                                        <a href="{{ path('ns_web_story_view', { 'id': story.id }) }}"   class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                        <a href="{{ path('ns_web_story_view', { 'id': story.id }) }}"  class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

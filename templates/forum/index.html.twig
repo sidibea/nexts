@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+{% block slider %}
+    <div class="kode-inner-banner">
+        <div class="kode-page-heading">
+            <h2>Explore {{ forum.name }} storylines</h2>
+            <ol class="breadcrumb">
+                <li><a href="{{ path('app_home') }}">Home</a></li>
+                <li><a href="{{ path('ns_web_forums_display') }}">Forums</a></li>
+                <li class="active">{{ forum.name }}</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container clearfix">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="postcontent  nobottommargin clearfix" style="font-family: Courier; width: 100%; text-align: justify; word-spacing: 4px">
+
+                    <!-- Posts
+                    ============================================= -->
+                    <div id="posts" class="small-thumbs alt">
+                        <div class="fancy-title title-double-border">
+                            <h1>All <span>{{ forum.name }}</span> Storylines</h1>
+                        </div>
+                        {% if forum.storylines|length > 0 %}
+                            {% for story in forum.storylines %}
+                                {% if forum.id == story.forum.id %}
+                                    <div class="entry clearfix">
+                                        <div class="entry-image">
+                                            <a href="{{ vich_uploader_asset(story, 'imageFile') }}" data-lightbox="image">
+                                                <img class="image_fade" src="{{ vich_uploader_asset(story, 'imageFile') }}" alt="{{ story.title }}">
+                                            </a>
+                                        </div>
+                                        <div class="entry-c">
+                                            <div class="entry-title">
+                                                <h2><a href="{{ path('ns_web_story_view', { 'id': story.id }) }}">{{ story.title }}</a></h2>
+                                            </div>
+                                            <ul class="entry-meta clearfix">
+                                                <li><i class="icon-calendar3"></i> {{  story.createdAt | date('d M Y') }}</li>
+                                                <li><a href="#"><i class="icon-user"></i> {{ story.publishedBy.firstname }} {{ story.publishedBy.lastname }}</a></li>
+                                                <li><i class="icon-folder-open"></i> <a href="">{{ story.scenes | length }} scenes</a></li>
+                                            </ul>
+                                            <div class="entry-content">
+                                                {% autoescape %}
+                                                    {{ story.description  |slice(0, 200)| raw }}... {# var won't be escaped #}
+                                                {% endautoescape %}
+                                                <br> <br>
+                                                <a href="{{ path('ns_web_story_view', { 'id': story.id }) }}" class="button button-3d   button-rounded button-green"><i class="icon-door"></i>View details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endif %}
+                            {% endfor %}
+
+                        {% else %}
+                            <h4>OOOPPS.! THERE IS NO STORYLINE UNDER THIS FORUM.</h4>
+
+
+
+                        {% endif %}
+
+
+
+
+
+
+                    </div><!-- #posts end -->
+
+                    <!-- Pagination
+                    ============================================= -->
+                    <ul class="pager nomargin">
+                        <li class="previous"><a href="#">&larr; Older</a></li>
+                        <li class="next"><a href="#">Newer &rarr;</a></li>
+                    </ul><!-- .pager end -->
+
+                </div><!-- .postcontent end -->
+            </div>
+            <div class="col-md-4">
+                {% include '_sidebar.html.twig' %}
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+{% endblock %}

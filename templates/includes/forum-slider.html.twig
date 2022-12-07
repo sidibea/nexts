@@ -1,0 +1,49 @@
+<!--SECTION CONTENT END-->
+<ul class="nav nav-tabs" role="tablist">
+    {% for f in forums %}
+        <li role="presentation" class="{% if loop.index == 1 %}active{% endif %}"><a href="#{{ f.id }}" role="tab" data-toggle="tab">{{ f.name }}</a></li>
+
+    {% endfor %}
+
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    {% for f in forums %}
+        <div role="tabpanel" class="tab-pane  {% if loop.index == 1 %}active{% endif %}" id="{{ f.id }}">
+            <ul class="bxslider-4">
+                <li>
+                    {% for story in f.storylines %}
+                        <!--PRODUCT GRID START-->
+                        <div class="col-md-3 col-sm-6 best-seller-pro">
+                            <a href="{{ path('ns_web_story_view', { 'id': story.id }) }}">
+                                <div class="book-container">
+                                    <div class="book">
+                                        <div class="book-cover">
+                                            <h1>{{ story.title }}</h1>
+                                            <h2>{{ story.publishedBy.firstname }} {{ story.publishedBy.lastname }} </h2>
+                                            <img src="{{ asset('images/2.png') }}" />
+                                        </div>
+                                        <div class="book-spine">
+                                            <h1>{{ story.title }}</h1>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </a>
+                            <div class="kode-caption">
+                                <div class="rating">
+                                    <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                                </div>
+                                <a href="{{ path('ns_web_story_view', { 'id': story.id }) }}" class="add-to-cart">View</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <!--PRODUCT GRID END-->
+                </li>
+
+            </ul>
+        </div>
+    {% endfor %}
+</div>

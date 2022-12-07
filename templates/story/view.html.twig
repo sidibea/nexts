@@ -1,0 +1,168 @@
+{% extends "base.html.twig" %}
+{% block title %} {{ story.title }} {% endblock %}
+{% block slider %}
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+    <div class="kode-inner-banner">
+        <div class="kode-page-heading">
+            <h2>{{ story.title }}</h2>
+            <ol class="breadcrumb">
+                <li><a href="{{ path('app_home') }}">Home</a></li>
+                <li><a href="#">{{ story.forum.name }}</a></li>
+                <li class="active">{{ story.title }}</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="container clearfix">
+        <div class="postcontent nobottommargin clearfix" style="font-family: Courier;  text-align: justify; word-spacing: 4px">
+            <div class="single-post nobottommargin">
+                <!-- Single Post
+                ============================================= -->
+                <div class="entry clearfix">
+                    <!-- Entry Title
+                    ============================================= -->
+                    <div class="entry-title">
+                        <h2 >{{ story.title }} <sup>{% if app.user.id == story.publishedBy.id %}<a style="font-size: 12px; color: #9f191f; " href="{{ path('ns_web_story_edit', { 'id': story.id }) }}"><i class="icon-pencil"></i>Edit</a> {% endif %}</sup> </h2>
+                    </div><!-- .entry-title end -->
+
+                    <!-- Entry Meta
+                    ============================================= -->
+                    <ul class="entry-meta clearfix">
+                        <li><i class="icon-calendar3"></i> {{ story.createdAt | date('d, M, Y') }} </li>
+                        <li><a href="#"><i class="icon-user"></i> {{ story.publishedBy.username }}</a></li>
+                        <li><i class="icon-folder-open"></i> <a href="#">{{ story.scenes | length }} scene(s)</a></li>
+                    </ul><!-- .entry-meta end -->
+
+                    <!-- Entry Content
+                    ============================================= -->
+                    <div class="entry-content notopmargin">
+
+                        <!-- Entry Image
+                        ============================================= -->
+                        <div class="entry-image alignleft">
+                            <div class="book-container">
+                                <div class="book">
+                                    <div class="book-cover">
+                                        <h1>{{ story.title }}</h1>
+                                        <h2>{{ story.publishedBy.firstname }} {{ story.publishedBy.lastname }} </h2>
+                                        <img src="{{ vich_uploader_asset(story, 'imageFile') }}" />
+                                    </div>
+                                    <div class="book-spine">
+                                        <h1>{{ story.title }}</h1>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- .entry-image end -->
+
+                        {{ story.description   |slice(0, 500)|raw  }}
+                        <br>
+
+
+                        <div class="clear"></div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href="{{ path('ns_web_read_story', { 'id': story.id }) }}" class="button button-3d   button-rounded button-green"><i class="icon-door"></i>Read story</a>
+
+                            </div>
+                            <div class="col-md-6">
+                                {% if (app.user in story.contributors) or app.user == story.publishedBy or story.type == 'Collaborative writing' %}
+                                    <a href="{{ path('ns_web_scenes_view', { 'id': story.id }) }}" class="button button-3d fright  button-rounded button-red"><i class="icon-door"></i>View scenes</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="line"></div>
+
+
+
+
+                        <!-- Post Single - Share
+                        ============================================= -->
+                        <div class="si-share noborder clearfix">
+                            <span>Share this Storyline:</span>
+                            <div>
+                                <a href="#" class="social-icon si-borderless si-facebook">
+                                    <i class="icon-facebook"></i>
+                                    <i class="icon-facebook"></i>
+                                </a>
+                                <a href="#" class="social-icon si-borderless si-twitter">
+                                    <i class="icon-twitter"></i>
+                                    <i class="icon-twitter"></i>
+                                </a>
+                                <a href="#" class="social-icon si-borderless si-pinterest">
+                                    <i class="icon-pinterest"></i>
+                                    <i class="icon-pinterest"></i>
+                                </a>
+                                <a href="#" class="social-icon si-borderless si-gplus">
+                                    <i class="icon-gplus"></i>
+                                    <i class="icon-gplus"></i>
+                                </a>
+                                <a href="#" class="social-icon si-borderless si-rss">
+                                    <i class="icon-rss"></i>
+                                    <i class="icon-rss"></i>
+                                </a>
+                                <a href="#" class="social-icon si-borderless si-email3">
+                                    <i class="icon-email3"></i>
+                                    <i class="icon-email3"></i>
+                                </a>
+                            </div>
+                        </div><!-- Post Single - Share End -->
+
+                    </div>
+                </div><!-- .entry end -->
+
+
+
+                <!-- Post Author Info
+                ============================================= -->
+                <div class="panel panel-default" style="font-family: Courier; text-align: justify; word-spacing: 4px">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Author:  <span><a href="#">{{ story.publishedBy.firstname }} {{ story.publishedBy.lastname }}</a></span></h3>
+                    </div>
+                    <div class="panel-body" >
+                        <div class="author-image">
+                            {% if story.publishedBy.profile is not empty %}
+                                <img src="{{ vich_uploader_asset(story.publishedBy, 'profileFile') }}" alt="" class="img-circle">
+                            {% else %}
+                                <img src="{{ absolute_url(asset('assets/front/images/icons/avatar.jpg')) }}" class="alignleft img-circle img-thumbnail notopmargin nobottommargin" alt="Avatar" style="max-width: 84px;">
+
+                            {% endif %}
+                        </div>
+                        {% if story.publishedBy.biographie is not null %}
+                            {{ story.publishedBy.biographie }}
+                        {% else %}
+                            No Biography of the author
+                        {% endif %}
+                    </div>
+                </div><!-- Post Single - Author End -->
+
+                <div class="line"></div>
+
+                <div class="row">
+
+
+                    <div class="col-md-12">
+                        {% if app.user.id == story.publishedBy.id %}
+                            <a href="{{ path('ns_web_scenes_add', { 'id': story.id }) }}" class="button button-3d button-rounded button-green fright"><i class="icon-plus"></i>Add new scene</a>
+
+                        {% endif %}
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+        {% include '_sidebar.html.twig' %}
+
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

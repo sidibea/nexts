@@ -1,0 +1,87 @@
+{% extends "Admin/layout.html.twig" %}
+
+{% block breadcrumbs %}
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1>Forums</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="page-header float-right">
+            <div class="page-title">
+                <ol class="breadcrumb text-right">
+                    <li class="">Dashboard</li>
+                    <li class="active">Scenes</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="animated fadeIn">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">{{ pagination.getTotalItemCount }} Scenes </strong>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th {% if pagination.isSorted('title') %} class="sorted"{% endif %} scope="col">{{ knp_pagination_sortable(pagination, 'title', 'title') }}</th>
+                                <th scope="col">Forum</th>
+                                <th scope="col">Storyline</th>
+                                <th scope="col">Proposer</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Content</th>
+                                <th scope="col">Status</th>
+                                <th scope="col"></th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for proposed in pagination %}
+                                <tr>
+                                    <th scope="row"><img class="image_fade" style="width: 50px; height: 50px " src="{{ vich_uploader_asset(proposed.scene.storyline, 'imageFile') }}"/></th>
+                                    <td>{{ proposed.scene.title }} [proposed]/{{ proposed.count }}</td>
+                                    <td>{{ proposed.scene.storyline.forum.name }}</td>
+                                    <td>{{ proposed.scene.storyline.title }}</td>
+                                    <td>{{ proposed.publishedBy.username }}</td>
+                                    <td>{{ proposed.scene.createdAt | date('d-m-Y') }}</td>
+                                    <td>{{ proposed.content | striptags |slice(0, 200)  }}</td>
+                                    <td>
+                                        {% if proposed.isEnabled == true %}
+                                            <span class="badge badge-success">Active</span>
+                                        {% else %}
+                                            <span class="badge badge-danger">Desactive</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('ns_admin_view_proposed_scenes', { 'id': proposed.id }) }}"  class="btn btn-success"><i class="fa fa-eye"></i></a>
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <div class="navigation center">
+                            {{ knp_pagination_render(pagination) }}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,3 @@
+<?php //Nucleos%255CUserBundle%255CModel%255CLocaleAwareUser%2523getTimezone
+
+return [PHP_INT_MAX, []];

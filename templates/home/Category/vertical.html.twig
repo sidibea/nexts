@@ -1,0 +1,3 @@
+{% for forum in forums %}
+    <li><a href="{{ path('app_forum_show', { 'id': forum.id }) }}"><div>{{ forum.name }}</div></a> </li>
+{% endfor %}

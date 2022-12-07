@@ -1,0 +1,5 @@
+<ul class="dl-submenu">
+    {% for f in forums %}
+        <li><a href="{{ path('app_forum_show', { 'id': f.id }) }}">{{ f.name }}</a></li>
+    {% endfor %}
+</ul>

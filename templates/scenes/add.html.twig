@@ -1,0 +1,55 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Add new scene {% endblock %}
+
+{% block content %}
+    <section class="content-wrap">
+        <div class="container clearfix">
+            <h3 class="title">Add new scene </h3>
+            <div class="postcontent nobottommargin clearfix">
+                {{ form_start(form) }}
+
+                {# Les erreurs générales du formulaire. #}
+                {{ form_errors(form) }}
+                <div class="row">
+                    {% if not form.vars.valid %}
+
+                        {# Loop through every form item #}
+                        {% for child in form.children %}
+                            {# Display the errors of the form item #}
+                            {%for error in child.vars.errors%}
+                                <div class="alert alert-warning">{{error.message}}</div>
+                            {%endfor%}
+                        {%endfor%}
+
+                    {%endif%}
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="nom_carte">Title</label>
+                        {{ form_widget(form.title, {'attr': {'class': 'form-control select-1 ', 'id': 'nom_carte', 'placeholder': '' }}) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="nom_carte">Scene</label>
+                        {{ form_widget(form.content, {'attr': {'class': 'form-control select-1 ', 'id': 'nom_carte', 'placeholder': '' }}) }}
+                    </div>
+
+                    <div class=" line"></div>
+
+                    <div class="form-group">
+                        <button type="submit" class="button button-3d button-large button-rounded button-green">Create</button>
+                    </div>
+
+                </div>
+
+
+                {{ form_rest(form) }}
+                {# Fermeture de la balise <form> du formulaire HTML #}
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+

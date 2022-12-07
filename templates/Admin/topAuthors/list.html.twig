@@ -1,0 +1,76 @@
+{% extends "Admin/layout.html.twig" %}
+
+
+{% block breadcrumbs %}
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1>Top authors section</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="page-header float-right">
+            <div class="page-title">
+                <ol class="breadcrumb text-right">
+                    <li class="">Dashboard</li>
+                    <li class="active">Top Authors</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{{ path('ns_admin_top_authors_new') }}" class="btn btn-secondary">New item</a><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">{{ pagination.getTotalItemCount }} items </strong>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th {% if pagination.isSorted('v.title') %} class="sorted"{% endif %} scope="col">{{ knp_pagination_sortable(pagination, 'Name', 'v.name') }}</th>
+                                <th scope="col">Biographie</th>
+                                <th scope="col"></th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for c in pagination %}
+                                <tr>
+                                    <td>{{ c.name }}</td>
+                                    <td>{{ c.biography |raw }}</td>
+                                    <td>
+                                        <a href=""  class="btn btn-success"><i class="fa fa-pencil"></i></a>
+                                        <a href=""  class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <div class="navigation center">
+                            {{ knp_pagination_render(pagination) }}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

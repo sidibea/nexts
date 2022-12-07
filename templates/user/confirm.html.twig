@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% block slider %}
+    <div class="kode-inner-banner">
+        <div class="kode-page-heading">
+            <h2>Create a new account</h2>
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">register</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% for message in app.flashes('registration-success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('registration-error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+{% endblock %}

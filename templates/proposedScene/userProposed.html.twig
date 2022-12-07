@@ -1,0 +1,34 @@
+{% if pagination.items is not empty %}
+    {% for proposed in pagination %}
+        <div class="col-xs-12 bottommargin-sm">
+            <div class="ipost clearfix">
+                <div class="row clearfix">
+
+                    <div class="col-sm-12">
+                        <div class="entry-title">
+                            <h3><a href="">{{ proposed.title }}</a></h3>
+                        </div>
+                        <ul class="entry-meta clearfix">
+                            <li><i class="icon-calendar3"></i> {{ proposed.createdAt |date(' d M Y') }}</li>
+                            <li><i class="icon-user"></i> {{ proposed.publishedBy.username }}</li>
+                        </ul>
+                        <div class="entry-content" style="font-family: Courier !important;">
+                            {{ proposed.content  | raw |striptags| slice(0, 200)  }}...
+
+                            <a href="{{ path('ns_web_proposed_scenes_view', { 'id': proposed.id }) }}" class="more-link"><i class="icon-door"></i>View scene</a>
+                            <a href="{{ path('ns_web_validate_scenes', { 'id': proposed.id }) }}" class="more-link"><i class="icon-door"></i>Validate scene</a>
+                            <a href="{{ path('ns_web_proposed_scenes_view', { 'id': proposed.id }) }}" class="more-link"><i class="icon-door"></i>Edit scene</a>
+                            <a href="{{ path('ns_web_proposed_scenes_view', { 'id': proposed.id }) }}" class="more-link"><i class="icon-door"></i>Delete scene</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    {% endfor %}
+
+{% endif %}
+
+

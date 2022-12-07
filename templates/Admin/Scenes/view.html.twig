@@ -1,0 +1,64 @@
+{% extends "Admin/layout.html.twig" %}
+
+{% block breadcrumbs %}
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1>Proposed scenes</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="page-header float-right">
+            <div class="page-title">
+                <ol class="breadcrumb text-right">
+                    <li class="">Dashboard</li>
+                    <li class="active">Scenes</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="animated fadeIn">
+
+        <div class="row" style="font-family: Courier">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">{{ proposed.scene.title }} </strong>
+                    </div>
+                    <div class="card-body">
+                        {{ proposed.scene.content | raw }}
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">{{ proposed.scene.title }} [proposed]/{{   proposed.count }} </strong>
+                    </div>
+                    <div class="card-body">
+                        {{ proposed.content | raw }}
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ path('ns_admin_activate_scenes', { 'id': proposed.id }) }}" class="btn btn-success btn-sm">
+                            <i class="fa fa-dot-circle-o"></i> Validate
+                        </a>
+                        <a href="{{ path('ns_admin_scenes') }}" class="btn btn-danger btn-sm">
+                            <i class="fa fa-dot-circle-o"></i> Return to list
+                        </a>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+        <div class="row">&nbsp;</div>
+
+    </div>
+{% endblock %}

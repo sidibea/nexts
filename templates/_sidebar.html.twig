@@ -1,0 +1,46 @@
+<div class="sidebar nobottommargin col_last clearfix">
+
+    <div class="forum">
+
+        <div class="sidebar-widgets-wrap">
+
+            <div class="widget widget_links clearfix">
+
+                <div class="fancy-title title-bottom-border">
+                    <h3>FORUMS</h3>
+                </div>
+
+                {{ render(controller('App\\Controller\\ForumController::vertical')) }}
+
+
+            </div>
+
+            <div class="widget clearfix">
+
+                <h4>Facebook Feeds</h4>
+                <div id="dribbble-widge">
+                    <div id="fb-root"></div>
+                    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v15.0&appId=679267767248029&autoLogAppEvents=1" nonce="hvGEXP9R"></script>
+                    <div class="fb-page" data-href="https://www.facebook.com/IRYobo" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/IRYobo" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/IRYobo">IR-Yobo</a></blockquote></div>
+                </div>
+
+            </div>
+
+            <div class="widget widget-twitter-feed clearfix">
+
+                <h4>Update !!</h4>
+                <img src="{{ absolute_url(asset('images/open.png')) }}" />
+
+            </div>
+
+            <div class="widget widget-twitter-feed clearfix">
+
+                <img src="{{ absolute_url(asset('images/google-play.png')) }}" />
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

@@ -1,0 +1,60 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ story.title }} {% endblock %}
+
+{% block slider %}
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+    <div class="kode-inner-banner">
+        <div class="kode-page-heading">
+            <h2>{{ proposed.title }}</h2>
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">Scenes</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+<div class="content-wrap">
+
+    <div class="container">
+        <div class="postcontent nobootommargin clearfix" style="font-family: Courier; width: 100%; text-align: justify; word-spacing: 4px">
+            <div class="clear"></div>
+            <div id="proposenewscene" >
+    {{ form_start(form) }}
+
+    {# Les erreurs générales du formulaire. #}
+    {{ form_errors(form) }}
+    <div class="row">
+        <div class="form-group">
+            <label for="nom_carte">Title</label>
+            {{ form_widget(form.title, {'attr': {'class': 'form-control select-1 ', 'id': 'nom_carte', 'placeholder': '' }}) }}
+        </div>
+
+        <div class="form-group">
+            <label for="nom_carte">Content</label>
+            {{ form_widget(form.content, {'attr': {'class': 'form-control select-1 ', 'id': 'nom_carte', 'placeholder': '' }}) }}
+        </div>
+
+        <div class=" line"></div>
+
+        <div class="form-group">
+            <button type="submit" class="button button-3d button-large button-rounded button-green">Submit</button>
+
+        </div>
+
+    </div>
+
+
+    {{ form_rest(form) }}
+
+    {# Fermeture de la balise <form> du formulaire HTML #}
+    {{ form_end(form) }}
+</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

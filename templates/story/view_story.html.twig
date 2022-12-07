@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block slider %}
+    <div class="kode-inner-banner">
+        <div class="kode-page-heading">
+            <h2>{{ scene.storyline.title }}</h2>
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">Login</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    {% for scene in pagination %}
+        <div class="content-wrap">
+            <div class="container clearfix">
+                <div class="postcontent nobottommargin clearfix" style="font-family: Courier; text-align: justify; word-spacing: 4px">
+                    <div class=" panel panel-default">
+                        <div class="panel-heading" style="font-family: Courier; text-align: justify; word-spacing: 4px"><b>{{ scene.storyline.title }}:{{ scene.title }}</b></div>
+                        <div class="panel-body" style="font-family: Courier; text-align: justify; word-spacing: 4px">
+                            {{ scene.content  | raw }}
+
+                        </div>
+
+                    </div>
+
+                    {{ knp_pagination_render(pagination) }}
+
+
+
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endblock %}

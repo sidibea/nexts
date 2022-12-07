@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ scene.storyline.title }} {% endblock %}
+{% block slider %}
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+    <div class="kode-inner-banner">
+        <div class="kode-page-heading">
+            <h2>{{ scene.storyline.title }}:{{ scene.title }}</h2>
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Storyline</a></li>
+                <li class="active">{{ scene.storyline.title }}</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="content-wrap">
+        <div class="container">
+            <div class="postcontent nobootommargin clearfix" style="font-family: Courier; text-align: justify; word-spacing: 4px">
+                <div class="clear"></div>
+                <div class=" panel panel-default">
+                    <div class="panel-heading" style="font-family: Courier; text-align: justify; word-spacing: 4px"><b>{{ scene.storyline.title }}:{{ scene.title }}</b></div>
+                    <div class="panel-body" style="font-family: Courier; text-align: justify; word-spacing: 4px">
+                        {{ scene.content  | raw }}
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

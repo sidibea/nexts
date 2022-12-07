@@ -1,0 +1,14 @@
+<h3>Welcome on nextscenes.com</h3>
+
+<p>Hi {{ firstname }} {{ lastname }}! Your friend on nextscenes want to invite you to help him write his story.</p>
+
+<p>To view to the storyline, go to: <a href="{{ url('ns_web_story_view', { 'id': story }) }}">click here</a> </p>
+
+
+{# example, assuming you have a route named "login" #}
+To login, click here: <a href="{{ url('login') }}"></a>. <br>
+
+Thanks!
+<br>
+{# Makes an absolute URL to the /images/logo.png file #}
+<img src="{{ absolute_url(asset('assets/front/images/logo.png')) }}">

@@ -1,0 +1,85 @@
+{% extends "Admin/layout.html.twig" %}
+
+
+{% block breadcrumbs %}
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1>Call to Action section</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="page-header float-right">
+            <div class="page-title">
+                <ol class="breadcrumb text-right">
+                    <li class="">Dashboard</li>
+                    <li class="active">Call to action</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{{ path('ns_admin_to_action_new') }}" class="btn btn-secondary">New item</a><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">{{ pagination.getTotalItemCount }} items </strong>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th {% if pagination.isSorted('v.title') %} class="sorted"{% endif %} scope="col">{{ knp_pagination_sortable(pagination, 'Title', 'v.title') }}</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Status</th>
+                                <th scope="col"></th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for c in pagination %}
+                                <tr>
+                                    <td><i class="{{ c.icon }}"></i></td>
+                                    <td>{{ c.title }}</td>
+                                    <td>{{ c.description }}</td>
+                                    <td>
+                                        {% if c.enabled == true %}
+                                            <span class="badge badge-success">Active</span>
+                                        {% else %}
+                                            <span class="badge badge-danger">Desactive</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href=""  class="btn btn-success"><i class="fa fa-pencil"></i></a>
+                                        <a href=""  class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <div class="navigation center">
+                            {{ knp_pagination_render(pagination) }}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

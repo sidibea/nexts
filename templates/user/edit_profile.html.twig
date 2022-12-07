@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+{% block slider %}
+    <div class="kode-inner-banner">
+        <div class="kode-page-heading">
+            <h2>Create a new account</h2>
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">register</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container clearfix">
+        <div style="width: 100%" class="postcontent nobottommargin clearfix">
+
+
+            <br>
+            {{ form_start(form, {'method': 'post', 'attr': {'class': 'fos_user_registration_register'}}) }}
+            {% if not form.vars.valid %}
+
+                {# Loop through every form item #}
+                {% for child in form.children %}
+                    {# Display the errors of the form item #}
+                    {%for error in child.vars.errors%}
+                        <div class="alert alert-warning">{{error.message}}</div>
+                    {%endfor%}
+                {%endfor%}
+
+            {%endif%}
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="register-form-name">First name:</label>
+                    {{ form_widget(form.firstname, {'attr': {'class': 'form-control ', 'placeholder': '' }}) }}
+
+                </div>
+                <div class="col-md-6 col_last">
+                    <label for="register-form-name">Last name:</label>
+                    {{ form_widget(form.lastname, {'attr': {'class': 'form-control ', 'placeholder': '' }}) }}
+
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="register-form-name">Email Address:</label>
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control ', 'placeholder': '' }}) }}
+
+                </div>
+                <div class="col-md-6 col_last">
+                    <label for="register-form-name">Choose a username:</label>
+                    {{ form_widget(form.username, {'attr': {'class': 'form-control ', 'placeholder': '' }}) }}
+
+                </div>
+            </div>
+            <div class="clear"></div>
+
+
+
+
+            <div class="clear"></div>
+            <div class="row">
+                <div class="col-md-12 ">
+                    <label for="register-form-repassword">Choose a subscription:</label>
+                    {{ form_widget(form.roles, {'attr': {'class': '', 'placeholder': '' }}) }}
+
+                </div>
+            </div>
+
+            <div class="clear"></div>
+            <br>
+
+            <div class="col_full nobottommargin">
+                <button class="button button-3d button-black nomargin" id="register-form-submit" name="register-form-submit" value="register">Save Now</button>
+            </div>
+
+            {{ form_rest(form) }}
+            {{ form_end(form) }}
+
+
+        </div>
+
+    </div>
+    <div class="clear"></div>
+    <br>
+    <br>
+    <br>
+
+{% endblock %}

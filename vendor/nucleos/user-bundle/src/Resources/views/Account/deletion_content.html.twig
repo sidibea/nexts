@@ -1,0 +1,11 @@
+{% trans_default_domain 'NucleosUserBundle' %}
+
+<div>
+    <div class="alert alert-danger">
+        {{ "deletion.confirmation"|trans }}
+    </div>
+</div>
+
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+{{ form_end(form) }}
